@@ -1,7 +1,8 @@
+import { server } from '../config';
 import Head from 'next/head';
 import ArticleList from '../components/ArticleList';
 
-export default function Home({ articles }) {
+export default function Home({ externalArticles, internalArticles }) {
   return (
     <div>
       <Head>
@@ -9,18 +10,28 @@ export default function Home({ articles }) {
         <meta name='keywords' content='web development, programming' />
       </Head>
 
-      <ArticleList articles={articles} />
+      <h2>External API</h2>
+      <ArticleList articles={externalArticles} />
+
+      <h2>Internal API</h2>
+      <ArticleList articles={internalArticles} />
     </div>
   )
 }
 
 export const getStaticProps = async () => {
-  const rest = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=6');
-  const articles =  await rest.json();
+  // external api
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=6');
+  const externalArticles =  await res.json();
+
+  // internal api
+  const resInternal = await fetch(`${server}/api/articles`);
+  const internalArticles =  await resInternal.json();
 
   return {
     props: {
-      articles
+      externalArticles,
+      internalArticles
     }
   }
 }
