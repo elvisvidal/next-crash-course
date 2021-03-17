@@ -1,8 +1,11 @@
-import Link from "next/link"
+import Link from 'next/link';
+import Meta from '../../../components/Meta';
+
 
 const article = ({ article }) => {
   return (
     <>
+      <Meta title={article.title} description={article.excerpt || article.body} />
       <h1>{article.title}</h1>
       <p>{article.body}</p>
       <br />

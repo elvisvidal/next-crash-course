@@ -9,7 +9,7 @@ const ArticleItem = ({ article }) => {
     >
       <a className={articleStyles.card}>
         <h3>{article.title} &rarr;</h3>
-        <p>{article.body}</p>
+        <p>{article.excerpt || article.body}</p>
       </a>
     </Link>
   )

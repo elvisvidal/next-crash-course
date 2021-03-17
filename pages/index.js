@@ -1,15 +1,9 @@
 import { server } from '../config';
-import Head from 'next/head';
 import ArticleList from '../components/ArticleList';
 
 export default function Home({ externalArticles, internalArticles }) {
   return (
     <div>
-      <Head>
-        <title>WebDev Newz</title>
-        <meta name='keywords' content='web development, programming' />
-      </Head>
-
       <h2>External API</h2>
       <ArticleList articles={externalArticles} />
 
